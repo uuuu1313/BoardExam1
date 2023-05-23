@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/main}">
+<main layout:fragment="content">
+    <form method="post">
+        <table border="1" th:object="${items}">
+            <thead>
+            <tr>
+                <td th:text="#{board.id}"></td>
+                <td th:text="#{board.subject}">글제목</td>
+                <td th:text="#{board.content}">글내용</td>
+                <td th:text="#{board.regDt}">작성일자</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${items}" th:object="${item}">
+                <td th:text="*{id}"></td>
+                <td>
+                    <a th:href="@{/board/view/{id}(id=*{id})}" th:text="*{subject}"></a>
+                </td>
+                <td th:text="*{content}"></td>
+                <td th:text="*{#temporals.format(regDt, 'yyyy.MM.dd')}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <dl> <!-- th:object="${boardForm}" -->
+            <dt>삭제할 게시글 번호</dt>
+            <dd>
+                <input type="text" name="id" th:value="${id}"> <!-- th:field="*{id}" -->
+                <!--            <div th:each="err : ${#fields.errors('id')}" th:err="${err}"></div>-->
+            </dd>
+        </dl>
+        <button type="submit">삭제하기</button>
+</html>
