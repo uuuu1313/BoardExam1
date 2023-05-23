@@ -13,7 +13,7 @@ public class BoardStatSchedule {
 
     @Scheduled(cron = "0 0 1 * * *")
     public void process(){
-        Long datTotal = boardDao.getDayTotal();
-
+        Long dayTotal = boardDao.getDayTotal();
+        System.out.println("전날 총 등록된 게시글 수는 " + dayTotal + "개 입니다.");
     }
 }
