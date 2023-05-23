@@ -1,7 +1,8 @@
-package com.koreait.models.board;
+package com.koreait.controllers.board;
 
 import com.koreait.controllers.board.BoardForm;
 import com.koreait.entities.Board;
+import com.koreait.models.board.*;
 import com.koreait.validators.BoardValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
