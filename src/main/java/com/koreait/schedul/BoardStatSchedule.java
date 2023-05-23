@@ -10,10 +10,15 @@ import org.springframework.stereotype.Component;
 public class BoardStatSchedule {
 
     private final BoardDao boardDao;
+    private final DailyBoardCount dailyBoardCount;
 
-    @Scheduled(cron = "0 0 1 * * *")
-    public void process(){
-        Long dayTotal = boardDao.getDayTotal();
-        System.out.println("전날 총 등록된 게시글 수는 " + dayTotal + "개 입니다.");
+    @Scheduled(cron = "0 0 1 * * *") // 새벽 1시마다 실행됨
+    public long process(){
+        long total = boardDao.getDayTotal();
+        System.out.println("다시 체크 저장 갯수 = " + total);
+
+        dailyBoardCount.totalSave(total);
+
+        return total;
     }
 }
